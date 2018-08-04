@@ -17,11 +17,11 @@
         const el = document.getElementById("output");
 
         const receiver = cast.framework.CastReceiverContext.getInstance();
-        receiver.start();
 
         receiver.addCustomMessageListener(namespace, evt => {
             console.log(evt);
         });
+        receiver.start();
     </script>
 </body>
 
