@@ -11,9 +11,16 @@
 </head>
 
 <body>
-    <cast-media-player></cast-media-player>
+    <pre id="output">No OUTPUT</pre>
     <script>
-        cast.framework.CastReceiverContext.getInstance().start();
+        const el = document.getElementById("output");
+
+        const receiver = cast.framework.CastReceiverContext.getInstance();
+        receiver.start();
+
+        receiver.addCustomMessageListener(namespace, evt => {
+            console.log(evt);
+        });
     </script>
 </body>
 
