@@ -7,19 +7,30 @@
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <style>
+        body {
+            background-color: wheat;
+        }
+    </style>
+
     <script src="//www.gstatic.com/cast/sdk/libs/caf_receiver/v3/cast_receiver_framework.js"></script>
 </head>
 
 <body>
     <pre id="output">No OUTPUT</pre>
     <script>
-        const namespace = 'urn:x-cast:com.recrosoftware.cast.test001';
+        const namespaceSender = 'urn:x-cast:com.recrosoftware.cast.test001.sender';
+        const namespaceReceiver = 'urn:x-cast:com.recrosoftware.cast.test001.receiver';
         const el = document.getElementById("output");
 
         const receiver = cast.framework.CastReceiverContext.getInstance();
 
-        receiver.addCustomMessageListener(namespace, evt => {
+        receiver.addCustomMessageListener(namespaceSender, evt => {
             console.log(evt);
+
+            el.innerHTML = evt.data;
+
+            receiver.sendCustomMessage(namespaceSender, null, 'response: ' + evt.data);
         });
         receiver.start();
     </script>
