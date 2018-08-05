@@ -28,9 +28,11 @@
         receiver.addCustomMessageListener(namespaceSender, evt => {
             console.log(evt);
 
-            el.innerHTML = evt.data;
+            const strData = JSON.stringify(evt.data);
 
-            receiver.sendCustomMessage(namespaceSender, null, 'response: ' + evt.data);
+            el.innerHTML = strData;
+
+            receiver.sendCustomMessage(namespaceSender, null, 'response: ' + strData);
         });
         receiver.start();
     </script>
